@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>웹사이트 제작 문의 | Learning Soft</title>
+    <meta name="description" content="전문적인 웹사이트 제작 서비스 문의하기">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes bounce { 0%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-6px); } }
+        .animate-fade-in { animation: fadeIn 0.3s ease forwards; }
+        .dot1 { animation: bounce 1.2s infinite; animation-delay: 0ms; }
+        .dot2 { animation: bounce 1.2s infinite; animation-delay: 150ms; }
+        .dot3 { animation: bounce 1.2s infinite; animation-delay: 300ms; }
+    </style>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex gap-2">
+                    <a href="/" class="px-4 py-2 rounded-lg font-bold text-sm transition-all bg-gray-100 text-gray-600 hover:bg-gray-200">
+                        AI 프로세스 자동화
+                    </a>
+                    <a href="/website.html" class="px-4 py-2 rounded-lg font-bold text-sm transition-all bg-purple-600 text-white shadow-md">
+                        사이트 제작
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="min-h-screen pt-24 pb-12 px-4 flex flex-col items-center">
+        <div class="w-full max-w-2xl">
+
+            <!-- 이메일 박스 -->
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4 rounded-r-lg text-center">
+                <p class="text-sm text-blue-800">
+                    <strong>📧 이메일로 빠른 상담이 가능합니다</strong><br>
+                    <a href="mailto:learningsoft90@gmail.com" class="font-bold underline hover:text-blue-600">learningsoft90@gmail.com</a>
+                </p>
+            </div>
+
+            <!-- 채팅 창 -->
+            <div class="bg-gray-50 rounded-2xl shadow-xl overflow-hidden">
+                <!-- 헤더 -->
+                <div class="bg-purple-600 px-5 py-4 flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center text-white font-bold text-sm">💼</div>
+                    <div>
+                        <p class="text-white font-bold text-sm">러닝소프트 웹사이트 제작 상담</p>
+                        <p class="text-purple-200 text-xs">모든 상담 및 견적 무료</p>
+                    </div>
+                    <div class="ml-auto flex items-center gap-1">
+                        <span class="w-2 h-2 bg-green-400 rounded-full" style="animation: bounce 1.2s infinite;"></span>
+                        <span class="text-purple-200 text-xs">온라인</span>
+                    </div>
+                </div>
+
+                <!-- 진행 바 -->
+                <div class="h-1 bg-gray-200">
+                    <div id="progressBar" class="h-1 bg-purple-500 transition-all duration-500" style="width: 0%"></div>
+                </div>
+
+                <!-- 메시지 영역 -->
+                <div id="chatMessages" class="px-4 py-5 space-y-4 overflow-y-auto" style="min-height: 340px; max-height: 420px;"></div>
+
+                <!-- 입력 영역 -->
+                <div id="inputArea" class="border-t border-gray-200 bg-white px-4 py-3"></div>
+            </div>
+
+            <p class="text-xs text-gray-400 text-center mt-3">
+                제출하신 정보는 문의 응답 목적으로만 사용되며, 안전하게 보호됩니다.
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 py-6 text-center text-gray-600 text-sm">
+        <div class="max-w-4xl mx-auto px-4">
+            <p class="font-bold text-gray-900 mb-2">러닝소프트</p>
+            <p>사업자등록번호: 123-45-67890</p>
+            <p>대표: 오태형</p>
+        </div>
+    </footer>
+
+    <!-- 카카오톡 플로팅 버튼 -->
+    <a href="http://pf.kakao.com/_UBAIX/chat" target="_blank" rel="noopener noreferrer"
+        style="position:fixed; bottom:24px; right:24px; z-index:50; display:flex; align-items:center; gap:8px; background-color:#FEE500; color:#3A1D1D; font-weight:700; padding:12px 24px; border-radius:9999px; box-shadow:0 4px 12px rgba(0,0,0,0.15); text-decoration:none;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 3C6.477 3 2 6.477 2 10.8c0 2.7 1.52 5.08 3.84 6.56l-.98 3.64 4.23-2.8c.91.2 1.88.3 2.91.3 5.523 0 10-3.477 10-7.8S17.523 3 12 3z"/>
+        </svg>
+        카카오톡 상담하기
+    </a>
+
+    <script>
+        const QUESTIONS = [
+            { id: 'name',         message: '안녕하세요! 😊 웹사이트 제작 상담 신청해 주셔서 감사합니다.\n담당자 성함을 알려주세요.', type: 'text',     placeholder: '예: 홍길동',              required: true },
+            { id: 'company',      message: '반갑습니다, {name}님! 🙌\n회사명 또는 상호명을 알려주세요.',                             type: 'text',     placeholder: '예: (주)회사명',           required: true },
+            { id: 'email',        message: '연락받으실 이메일 주소를 알려주세요. 📧',                                               type: 'email',    placeholder: '예: example@company.com', required: true },
+            { id: 'phone',        message: '연락처(전화번호)를 알려주세요. 📱',                                                    type: 'tel',      placeholder: '예: 010-1234-5678',       required: true },
+            { id: 'websiteType',  message: '어떤 유형의 사이트를 원하시나요?',                                                     type: 'choice',   choices: ['회사 홈페이지', '쇼핑몰 / 이커머스', '랜딩페이지', '포트폴리오', '블로그 / 미디어', '기타'], required: true },
+{ id: 'description',  message: '원하시는 사이트에 대해 자유롭게 설명해 주세요! ✍️\n(기능, 참고 사이트, 일정 등)',        type: 'textarea', placeholder: '예: 쇼핑몰을 만들고 싶어요. 결제 기능과 회원 관리가 필요합니다.', required: true },
+        ];
+
+        let currentStep = 0;
+        const answers = {};
+
+        function resolve(msg) {
+            return msg.replace('{name}', answers.name || '');
+        }
+
+        function scrollToBottom() {
+            const el = document.getElementById('chatMessages');
+            el.scrollTop = el.scrollHeight;
+        }
+
+        function addBotBubble(text) {
+            const wrap = document.createElement('div');
+            wrap.className = 'flex items-start gap-3 animate-fade-in';
+            wrap.innerHTML = `
+                <div class="w-9 h-9 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0 shadow">💼</div>
+                <div class="bg-white border border-gray-200 rounded-2xl rounded-tl-none px-4 py-3 max-w-xs md:max-w-sm shadow-sm">
+                    <p class="text-gray-800 text-sm whitespace-pre-line">${text}</p>
+                </div>`;
+            document.getElementById('chatMessages').appendChild(wrap);
+            scrollToBottom();
+        }
+
+        function addUserBubble(text) {
+            const wrap = document.createElement('div');
+            wrap.className = 'flex justify-end animate-fade-in';
+            wrap.innerHTML = `
+                <div class="bg-purple-600 text-white rounded-2xl rounded-tr-none px-4 py-3 max-w-xs md:max-w-sm shadow-sm">
+                    <p class="text-sm">${text}</p>
+                </div>`;
+            document.getElementById('chatMessages').appendChild(wrap);
+            scrollToBottom();
+        }
+
+        function showTyping() {
+            const wrap = document.createElement('div');
+            wrap.id = 'typingIndicator';
+            wrap.className = 'flex items-start gap-3 animate-fade-in';
+            wrap.innerHTML = `
+                <div class="w-9 h-9 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0 shadow">💼</div>
+                <div class="bg-white border border-gray-200 rounded-2xl rounded-tl-none px-4 py-3 shadow-sm">
+                    <div class="flex gap-1 items-center h-4">
+                        <span class="w-2 h-2 bg-gray-400 rounded-full dot1"></span>
+                        <span class="w-2 h-2 bg-gray-400 rounded-full dot2"></span>
+                        <span class="w-2 h-2 bg-gray-400 rounded-full dot3"></span>
+                    </div>
+                </div>`;
+            document.getElementById('chatMessages').appendChild(wrap);
+            scrollToBottom();
+        }
+
+        function removeTyping() {
+            const el = document.getElementById('typingIndicator');
+            if (el) el.remove();
+        }
+
+        function updateProgress() {
+            const pct = (currentStep / QUESTIONS.length) * 100;
+            document.getElementById('progressBar').style.width = pct + '%';
+        }
+
+        function renderInput() {
+            const area = document.getElementById('inputArea');
+            area.innerHTML = '';
+            if (currentStep >= QUESTIONS.length) return;
+
+            const q = QUESTIONS[currentStep];
+
+            if (q.type === 'choice') {
+                const wrap = document.createElement('div');
+                wrap.className = 'flex flex-wrap gap-2';
+                q.choices.forEach(choice => {
+                    const btn = document.createElement('button');
+                    btn.className = 'px-4 py-2 bg-purple-50 border-2 border-purple-200 text-purple-700 font-medium rounded-full text-sm hover:bg-purple-600 hover:text-white hover:border-purple-600 transition-all';
+                    btn.textContent = choice;
+                    btn.onclick = () => submitAnswer(choice);
+                    wrap.appendChild(btn);
+                });
+                if (!q.required) {
+                    const skip = document.createElement('button');
+                    skip.className = 'px-4 py-2 bg-gray-100 border-2 border-gray-200 text-gray-500 font-medium rounded-full text-sm hover:bg-gray-200 transition-all';
+                    skip.textContent = '건너뜀';
+                    skip.onclick = () => submitAnswer('');
+                    wrap.appendChild(skip);
+                }
+                area.appendChild(wrap);
+            } else if (q.type === 'textarea') {
+                const wrap = document.createElement('div');
+                wrap.className = 'flex gap-2';
+                const ta = document.createElement('textarea');
+                ta.rows = 2;
+                ta.placeholder = q.placeholder;
+                ta.className = 'flex-1 px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition resize-none text-sm';
+                ta.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submitAnswer(ta.value); } });
+                const btn = document.createElement('button');
+                btn.className = 'px-4 py-2 bg-purple-600 text-white rounded-xl font-medium text-sm hover:bg-purple-700 transition-all flex-shrink-0';
+                btn.textContent = '전송';
+                btn.onclick = () => submitAnswer(ta.value);
+                wrap.appendChild(ta);
+                wrap.appendChild(btn);
+                area.appendChild(wrap);
+                setTimeout(() => ta.focus(), 100);
+            } else {
+                const wrap = document.createElement('div');
+                wrap.className = 'flex gap-2';
+                const inp = document.createElement('input');
+                inp.type = q.type;
+                inp.placeholder = q.placeholder;
+                inp.className = 'flex-1 px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition text-sm';
+                inp.addEventListener('keydown', e => { if (e.key === 'Enter') submitAnswer(inp.value); });
+                const btn = document.createElement('button');
+                btn.className = 'px-4 py-2 bg-purple-600 text-white rounded-xl font-medium text-sm hover:bg-purple-700 transition-all flex-shrink-0';
+                btn.textContent = '전송';
+                btn.onclick = () => submitAnswer(inp.value);
+                wrap.appendChild(inp);
+                wrap.appendChild(btn);
+                area.appendChild(wrap);
+                setTimeout(() => inp.focus(), 100);
+            }
+        }
+
+        function submitAnswer(value) {
+            const q = QUESTIONS[currentStep];
+            if (!value.trim() && q.required) return;
+
+            const display = value.trim() || '건너뜀';
+            answers[q.id] = value.trim();
+            document.getElementById('inputArea').innerHTML = '';
+            addUserBubble(display);
+
+            currentStep++;
+            updateProgress();
+
+            showTyping();
+            setTimeout(() => {
+                removeTyping();
+                if (currentStep >= QUESTIONS.length) {
+                    addBotBubble('감사합니다! 🎉 입력하신 내용을 확인하고 빠르게 연락드리겠습니다.');
+                    sendEmail(answers);
+                    showSuccess();
+                } else {
+                    addBotBubble(resolve(QUESTIONS[currentStep].message));
+                    renderInput();
+                }
+            }, 700);
+        }
+
+        const FUNCTION_URL = 'https://asia-northeast3-htmlprojects-58993.cloudfunctions.net/sendInquiryEmail';
+
+        async function sendEmail(ans) {
+            const message = `[웹사이트 제작 문의]
+
+담당자: ${ans.name || '-'}
+회사명: ${ans.company || '-'}
+이메일: ${ans.email || '-'}
+연락처: ${ans.phone || '-'}
+사이트 유형: ${ans.websiteType || '-'}
+프로젝트 설명: ${ans.description || '-'}`;
+
+            try {
+                await fetch(FUNCTION_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        from_name: ans.name,
+                        from_email: ans.email,
+                        subject: `[웹사이트 제작 문의] ${ans.company} - ${ans.name}`,
+                        message,
+                    }),
+                });
+            } catch(e) {
+                console.error('이메일 전송 실패:', e);
+            }
+        }
+
+        function showSuccess() {
+            document.getElementById('inputArea').innerHTML = `
+                <div class="text-center py-2">
+                    <p class="text-sm text-gray-500 mb-3">문의가 성공적으로 접수되었습니다!</p>
+                    <button onclick="location.reload()" class="px-5 py-2 bg-purple-600 text-white rounded-lg text-sm font-medium hover:bg-purple-700 transition-colors">
+                        새로운 문의하기
+                    </button>
+                </div>`;
+        }
+
+        // 시작
+        setTimeout(() => {
+            addBotBubble(resolve(QUESTIONS[0].message));
+            renderInput();
+        }, 600);
+    </script>
+</body>
+
+</html>
