@@ -56,7 +56,7 @@ const WebsiteCreation = ({ onBackToHome, onInquiryClick }) => {
                                 위험: 낡은 웹사이트
                             </span>
                             <h2 className="text-2xl md:text-3xl font-extrabold leading-tight mb-2 font-sans">
-                                "홈페이지가 이래서는...<br />
+                                "웹사이트가 이래서는...<br />
                                 <span className="text-red-500">고객이 도망갑니다"</span>
                             </h2>
                             <p className="text-gray-400 text-xs md:text-sm">모바일에서 깨지고, 느리고, 복잡한 웹사이트...</p>

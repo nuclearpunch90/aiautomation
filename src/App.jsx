@@ -10,7 +10,7 @@ import WebsiteCreation from './components/WebsiteCreation'
 import './App.css'
 
 function App() {
-  const [currentView, setCurrentView] = useState('home') // 'home', 'inquiry', 'faq'
+  const [currentView, setCurrentView] = useState('website') // 'home', 'inquiry', 'faq'
 
   const handleInquiryClick = () => {
     setCurrentView('inquiry')
@@ -107,7 +107,7 @@ function App() {
         currentView={currentView}
       />
       {renderContent()}
-      {currentView !== 'website' && <FloatingAction onInquiryClick={handleInquiryClick} showInquiryButton={currentView !== 'inquiry'} />}
+      <FloatingAction onInquiryClick={handleInquiryClick} showInquiryButton={currentView !== 'inquiry'} />
       <Footer />
     </div>
   )
